@@ -1,4 +1,9 @@
 ---
+import "../styles/global.css";
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
 const pageTitle = "Sobre mi";
 
 const identity = {
@@ -19,6 +24,14 @@ const skills = [
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const operatingSystem = "Linux";
+const quantity = 3;
+const footwear = "boots";
+const student = false;
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -28,11 +41,20 @@ const goal = 3;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
+    <style define:vars={{ skillColor, fontWeight, textCase }}>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+      .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+      }
+    </style>
   </head>
   <body>
-    <a href="/">Inicio</a>
-    <a href="/about/">Sobre mi</a>
-    <a href="/blog/">Blog</a>
+    <Header />
 
     <h1>Mi sitio Astro</h1>
     <h1>{pageTitle}</h1>
@@ -62,7 +84,7 @@ const goal = 3;
     </ul>
     <p>Mis habilidades son:</p>
     <ul>
-      {skills.map((skill) => <li>{skill}</li>)}
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
     </ul>
     {happy && <p>¡Estoy feliz de aprender Astro!</p>}
 
@@ -75,5 +97,27 @@ const goal = 3;
         <p>Mi objetivo no son 3 días.</p>
       )
     }
+
+    <p>{operatingSystem}</p>
+
+    <p>Linux</p>
+
+    {student && <p>Sigo estudiando.</p>}
+
+    <p>Tengo {quantity + 8} pares de {footwear}</p>
+
+    <p>Tengo 11 pares de botas</p>
+
+    {
+      operatingSystem === "MacOS" ? (
+        <p>Utilizo un Mac.</p>
+      ) : (
+        <p>No utilizo un Mac.</p>
+      )
+    }
+    <Footer />
   </body>
+  <script>
+    import "../scripts/menu.js";
+  </script>
 </html>
